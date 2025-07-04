@@ -990,6 +990,17 @@
         function validateStep(step) {
             // Simple validation for required fields
             let isValid = true;
+
+    if (step === 0) {
+        const industry = document.getElementById('industry').value;
+        if (!industry) {
+            alert('Please select an industry');
+            isValid = false;
+        } else if (industry === 'other' && !document.getElementById('industry-other-text').value) {
+            alert('Please specify your industry');
+            isValid = false;
+        }
+    }
             
             if (step === 0) {
                 if (!document.getElementById('industry').value) {
@@ -1060,20 +1071,20 @@
         
         // Industry selection functions
         function selectIndustry(industry) {
-            // Update UI
-            document.querySelectorAll('.industry-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            document.getElementById(`industry-card-${industry}`).classList.add('selected');
-            
-            // Set industry value
-            document.getElementById('industry').value = industryConfig[industry].name;
-            
-            // Show/hide other text field
-            const otherText = document.getElementById('industry-other-text');
-            otherText.style.display = industry === 'other' ? 'block' : 'none';
-            if (industry !== 'other') otherText.value = '';
-        }
+    // Update UI
+    document.querySelectorAll('.industry-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    document.getElementById(`industry-card-${industry}`).classList.add('selected');
+    
+    // Set industry value - this is what the validation checks for
+    document.getElementById('industry').value = industry;
+    
+    // Show/hide other text field
+    const otherText = document.getElementById('industry-other-text');
+    otherText.style.display = industry === 'other' ? 'block' : 'none';
+    if (industry !== 'other') otherText.value = '';
+}
         
         // Template selection
         function selectTemplate(template) {

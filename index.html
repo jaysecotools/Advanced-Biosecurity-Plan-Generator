@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -455,7 +456,7 @@
             <div class="question">
                 <label class="required">Primary Industry</label>
                 <div class="industry-selection">
-                    <div class="industry-card" onclick="selectIndustry('natural')" id="industry-card-natural">
+                    <div class="industry-card" onclick="return selectIndustry('natural')" id="industry-card-natural">
                         <div class="industry-icon">🌱</div>
                         <div>
                             <h3>Natural Area Restoration</h3>
@@ -463,7 +464,7 @@
                         </div>
                     </div>
                     
-                    <div class="industry-card" onclick="selectIndustry('agriculture')" id="industry-card-agriculture">
+                    <div class="industry-card" onclick="return selectIndustry('agriculture')" id="industry-card-agriculture">
                         <div class="industry-icon">🚜</div>
                         <div>
                             <h3>Agriculture</h3>
@@ -471,7 +472,7 @@
                         </div>
                     </div>
                     
-                    <div class="industry-card" onclick="selectIndustry('aquaculture')" id="industry-card-aquaculture">
+                    <div class="industry-card" onclick="return selectIndustry('aquaculture')" id="industry-card-aquaculture">
                         <div class="industry-icon">🐟</div>
                         <div>
                             <h3>Aquaculture</h3>
@@ -479,7 +480,7 @@
                         </div>
                     </div>
                     
-                    <div class="industry-card" onclick="selectIndustry('healthcare')" id="industry-card-healthcare">
+                    <div class="industry-card" onclick="return selectIndustry('healthcare')" id="industry-card-healthcare">
                         <div class="industry-icon">🏥</div>
                         <div>
                             <h3>Healthcare</h3>
@@ -487,7 +488,7 @@
                         </div>
                     </div>
                     
-                    <div class="industry-card" onclick="selectIndustry('research')" id="industry-card-research">
+                    <div class="industry-card" onclick="return selectIndustry('research')" id="industry-card-research">
                         <div class="industry-icon">🔬</div>
                         <div>
                             <h3>Research Facilities</h3>
@@ -495,7 +496,7 @@
                         </div>
                     </div>
                     
-                    <div class="industry-card" onclick="selectIndustry('other')" id="industry-card-other">
+                    <div class="industry-card" onclick="return selectIndustry('other')" id="industry-card-other">
                         <div class="industry-icon">❓</div>
                         <div>
                             <h3>Other Industry</h3>
@@ -508,8 +509,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button disabled class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Continue</button>
+                <button type="button" disabled class="btn-secondary">Previous</button>
+                <button type="button" onclick="return validateAndContinue()" class="btn-primary">Continue</button>
             </div>
         </div>
         
@@ -556,8 +557,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -594,8 +595,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -630,8 +631,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -665,8 +666,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -702,8 +703,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -757,8 +758,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -794,8 +795,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="nextStep()" class="btn-primary">Next</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return nextStep()" class="btn-primary">Next</button>
             </div>
         </div>
         
@@ -809,10 +810,10 @@
                     <div class="team-member">
                         <input type="text" placeholder="Name" class="team-name">
                         <input type="text" placeholder="Role" class="team-role">
-                        <button onclick="removeTeamMember(this)" class="btn-danger">Remove</button>
+                        <button type="button" onclick="return removeTeamMember(this)" class="btn-danger">Remove</button>
                     </div>
                 </div>
-                <button onclick="addTeamMember()" class="btn-secondary" style="margin-top: 10px;">Add Team Member</button>
+                <button type="button" onclick="return addTeamMember()" class="btn-secondary" style="margin-top: 10px;">Add Team Member</button>
             </div>
             
             <div class="question">
@@ -830,17 +831,17 @@
             <div class="question">
                 <label for="template-select">Plan Template Style</label>
                 <div class="template-gallery">
-                    <div class="template-card" onclick="selectTemplate('basic')" id="template-basic">
+                    <div class="template-card" onclick="return selectTemplate('basic')" id="template-basic">
                         <div class="template-icon">📄</div>
                         <h3>Basic</h3>
                         <p>Simple, straightforward plan</p>
                     </div>
-                    <div class="template-card" onclick="selectTemplate('detailed')" id="template-detailed">
+                    <div class="template-card" onclick="return selectTemplate('detailed')" id="template-detailed">
                         <div class="template-icon">📑</div>
                         <h3>Detailed</h3>
                         <p>Comprehensive with sections</p>
                     </div>
-                    <div class="template-card" onclick="selectTemplate('certified')" id="template-certified">
+                    <div class="template-card" onclick="return selectTemplate('certified')" id="template-certified">
                         <div class="template-icon">🏆</div>
                         <h3>Certification-Ready</h3>
                         <p>Formal documentation</p>
@@ -855,8 +856,8 @@
             </div>
             
             <div class="nav-buttons">
-                <button onclick="prevStep()" class="btn-secondary">Previous</button>
-                <button onclick="generatePlan()" class="btn-primary">Generate Plan</button>
+                <button type="button" onclick="return prevStep()" class="btn-secondary">Previous</button>
+                <button type="button" onclick="return generatePlan()" class="btn-primary">Generate Plan</button>
             </div>
         </div>
     </div>
@@ -865,10 +866,10 @@
         <h2 id="output-title">Biosecurity Plan</h2>
         <div id="output-content"></div>
         <div class="share-options">
-            <button onclick="savePDF()" class="btn-primary">Save as PDF</button>
-            <button onclick="sharePlan('email')" class="btn-secondary">Email Plan</button>
-            <button onclick="sharePlan('link')" class="btn-secondary">Get Shareable Link</button>
-            <button onclick="resetForm()" class="btn-danger">Start New Plan</button>
+            <button type="button" onclick="return savePDF()" class="btn-primary">Save as PDF</button>
+            <button type="button" onclick="return sharePlan('email')" class="btn-secondary">Email Plan</button>
+            <button type="button" onclick="return sharePlan('link')" class="btn-secondary">Get Shareable Link</button>
+            <button type="button" onclick="return resetForm()" class="btn-danger">Start New Plan</button>
         </div>
     </div>
     
@@ -933,6 +934,9 @@
         
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', function() {
+            // Set default industry selection
+            selectIndustry('natural');
+            
             loadProgress();
             updateStepIndicator();
             
@@ -951,56 +955,58 @@
         });
         
         // Navigation functions
-        function nextStep() {
-            if (validateStep(currentStep)) {
-                saveProgress();
-                document.getElementById(`step${currentStep}`).classList.remove('active');
-                currentStep++;
-                
-                // Special handling for certain steps
-                if (currentStep === 3) updateActivities();
-                if (currentStep === 4) updateRisks();
-                if (currentStep === 5) generateRiskMatrix();
-                if (currentStep === 7) updateMeasures();
-                
-                document.getElementById(`step${currentStep}`).classList.add('active');
-                updateStepIndicator();
+        function goToStep(stepNumber) {
+            // Validate current step before leaving
+            if (stepNumber > currentStep && !validateStep(currentStep)) {
+                return false;
             }
-        }
-        
-        function prevStep() {
-            saveProgress();
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep--;
-            document.getElementById(`step${currentStep}`).classList.add('active');
+
+            // Hide all steps
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            // Show the requested step
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            currentStep = stepNumber;
             updateStepIndicator();
+            
+            // Special handling for certain steps
+            if (currentStep === 3) updateActivities();
+            if (currentStep === 4) updateRisks();
+            if (currentStep === 5) generateRiskMatrix();
+            if (currentStep === 7) updateMeasures();
+            
+            return false;
         }
-        
+
+        function nextStep() {
+            return goToStep(currentStep + 1);
+        }
+
+        function prevStep() {
+            return goToStep(currentStep - 1);
+        }
+
         function updateStepIndicator() {
             document.getElementById('step-indicator').textContent = stepIndicators[currentStep];
             document.getElementById('progress-bar').style.width = `${(currentStep / (totalSteps-1)) * 100}%`;
             document.getElementById('progress-text').textContent = `Step ${currentStep+1} of ${totalSteps}`;
-            
-            // Update review summary if we're on the review step
-            if (currentStep === 8) {
-                updateReviewSummary();
-            }
         }
         
         function validateStep(step) {
             // Simple validation for required fields
             let isValid = true;
 
-    if (step === 0) {
-        const industry = document.getElementById('industry').value;
-        if (!industry) {
-            alert('Please select an industry');
-            isValid = false;
-        } else if (industry === 'other' && !document.getElementById('industry-other-text').value) {
-            alert('Please specify your industry');
-            isValid = false;
-        }
-            
+            if (step === 0) {
+                const industry = document.getElementById('industry').value;
+                if (!industry) {
+                    alert('Please select an industry');
+                    isValid = false;
+                } else if (industry === 'other' && !document.getElementById('industry-other-text').value) {
+                    alert('Please specify your industry');
+                    isValid = false;
+                }
             } else if (step === 1) {
                 if (!document.getElementById('org-name').value) {
                     alert('Please enter your organization name');
@@ -1065,20 +1071,44 @@
         
         // Industry selection functions
         function selectIndustry(industry) {
-    // Update UI
-    document.querySelectorAll('.industry-card').forEach(card => {
-        card.classList.remove('selected');
-    });
-    document.getElementById(`industry-card-${industry}`).classList.add('selected');
-    
-    // Set industry value - this is what the validation checks for
-    document.getElementById('industry').value = industry;
-    
-    // Show/hide other text field
-    const otherText = document.getElementById('industry-other-text');
-    otherText.style.display = industry === 'other' ? 'block' : 'none';
-    if (industry !== 'other') otherText.value = '';
-}
+            // Update UI
+            document.querySelectorAll('.industry-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById(`industry-card-${industry}`).classList.add('selected');
+            
+            // Set the hidden input value
+            document.getElementById('industry').value = industry;
+            
+            // Handle "Other" case
+            const otherText = document.getElementById('industry-other-text');
+            if (industry === 'other') {
+                otherText.style.display = 'block';
+            } else {
+                otherText.style.display = 'none';
+            }
+            
+            return false;
+        }
+
+        function validateAndContinue() {
+            const industry = document.getElementById('industry').value;
+            const otherText = document.getElementById('industry-other-text');
+            
+            if (!industry) {
+                alert('Please select an industry');
+                return false;
+            }
+            
+            if (industry === 'other' && !otherText.value.trim()) {
+                alert('Please specify your industry');
+                otherText.focus();
+                return false;
+            }
+            
+            // If validation passes, proceed to next step
+            return goToStep(1);
+        }
         
         // Template selection
         function selectTemplate(template) {
@@ -1087,12 +1117,15 @@
             });
             document.getElementById(`template-${template}`).classList.add('selected');
             document.getElementById('template').value = template;
+            return false;
         }
         
         // Dynamic content updates based on industry
         function updateActivities() {
-            const industry = document.querySelector('input[name="industry"]:checked')?.value || 'natural';
-            const config = industryConfig[industry] || industryConfig.natural;
+            const industry = document.getElementById('industry').value || 'natural';
+            const industryKey = Object.keys(industryConfig).find(key => 
+                industryConfig[key].name === industry) || 'natural';
+            const config = industryConfig[industryKey] || industryConfig.natural;
             
             const container = document.getElementById('activities-container');
             container.innerHTML = config.activities.map(activity => `
@@ -1113,11 +1146,27 @@
                 document.getElementById('activity-other-text').style.display = 
                     this.checked ? 'block' : 'none';
             });
+            
+            // Load saved activities if they exist
+            const savedData = localStorage.getItem('biosecurityPlanData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                setSelectedCheckboxes('activities', data.activities || []);
+                document.getElementById('activity-other-text').value = data.activityOther || '';
+                if (data.activities && data.activities.includes('Other')) {
+                    document.getElementById('activity-other').checked = true;
+                    document.getElementById('activity-other-text').style.display = 'block';
+                }
+                document.getElementById('activity-frequency').value = data.activityFrequency || '';
+                document.getElementById('activity-staff').value = data.activityStaff || '';
+            }
         }
         
         function updateRisks() {
-            const industry = document.querySelector('input[name="industry"]:checked')?.value || 'natural';
-            const config = industryConfig[industry] || industryConfig.natural;
+            const industry = document.getElementById('industry').value || 'natural';
+            const industryKey = Object.keys(industryConfig).find(key => 
+                industryConfig[key].name === industry) || 'natural';
+            const config = industryConfig[industryKey] || industryConfig.natural;
             
             const container = document.getElementById('risks-container');
             container.innerHTML = config.risks.map(risk => `
@@ -1138,11 +1187,27 @@
                 document.getElementById('risk-other-text').style.display = 
                     this.checked ? 'block' : 'none';
             });
+            
+            // Load saved risks if they exist
+            const savedData = localStorage.getItem('biosecurityPlanData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                setSelectedCheckboxes('risks', data.risks || []);
+                document.getElementById('risk-other-text').value = data.riskOther || '';
+                if (data.risks && data.risks.includes('Other')) {
+                    document.getElementById('risk-other').checked = true;
+                    document.getElementById('risk-other-text').style.display = 'block';
+                }
+                document.getElementById('known-issues').value = data.knownIssues || '';
+                document.getElementById('visitor-frequency').value = data.visitorFrequency || '';
+            }
         }
         
         function updateMeasures() {
-            const industry = document.querySelector('input[name="industry"]:checked')?.value || 'natural';
-            const config = industryConfig[industry] || industryConfig.natural;
+            const industry = document.getElementById('industry').value || 'natural';
+            const industryKey = Object.keys(industryConfig).find(key => 
+                industryConfig[key].name === industry) || 'natural';
+            const config = industryConfig[industryKey] || industryConfig.natural;
             
             const container = document.getElementById('measures-container');
             container.innerHTML = config.measures.map(measure => `
@@ -1163,6 +1228,22 @@
                 document.getElementById('measure-other-text').style.display = 
                     this.checked ? 'block' : 'none';
             });
+            
+            // Load saved measures if they exist
+            const savedData = localStorage.getItem('biosecurityPlanData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                setSelectedCheckboxes('measures', data.measures || []);
+                document.getElementById('measure-other-text').value = data.measureOther || '';
+                if (data.measures && data.measures.includes('Other')) {
+                    document.getElementById('measure-other').checked = true;
+                    document.getElementById('measure-other-text').style.display = 'block';
+                }
+                document.getElementById('implementation').value = data.implementation || '';
+                document.getElementById('monitoring').value = data.monitoring || '';
+                document.getElementById('budget').value = data.budget || '';
+                document.getElementById('timeline').value = data.timeline || '';
+            }
         }
         
         // Risk assessment matrix
@@ -1191,6 +1272,23 @@
                     <td class="risk-priority">Low</td>
                 </tr>
             `).join('');
+            
+            // Load saved risk scores if they exist
+            const savedData = localStorage.getItem('biosecurityPlanData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                if (data.riskScores) {
+                    data.riskScores.forEach((risk, i) => {
+                        const row = document.querySelectorAll('#risk-matrix-body tr')[i];
+                        if (row) {
+                            row.querySelector('.likelihood').value = risk.likelihood;
+                            row.querySelector('.impact').value = risk.impact;
+                            updateRiskScore(row.querySelector('.likelihood'));
+                        }
+                    });
+                    document.getElementById('risk-notes').value = data.riskNotes || '';
+                }
+            }
             
             // Initialize risk chart
             updateRiskChart();
@@ -1245,57 +1343,59 @@
                 riskChart.destroy();
             }
             
-            riskChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: risks.map(r => r.name),
-                    datasets: [{
-                        label: 'Risk Score',
-                        data: risks.map(r => r.score),
-                        backgroundColor: risks.map(r => 
-                            r.priority === 'High' ? 'rgba(198, 40, 40, 0.7)' :
-                            r.priority === 'Medium' ? 'rgba(255, 143, 0, 0.7)' :
-                            'rgba(46, 125, 50, 0.7)'),
-                        borderColor: risks.map(r => 
-                            r.priority === 'High' ? 'rgba(198, 40, 40, 1)' :
-                            r.priority === 'Medium' ? 'rgba(255, 143, 0, 1)' :
-                            'rgba(46, 125, 50, 1)'),
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 9,
-                            title: {
-                                display: true,
-                                text: 'Risk Score'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Identified Risks'
-                            }
-                        }
+            if (risks.length > 0) {
+                riskChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: risks.map(r => r.name),
+                        datasets: [{
+                            label: 'Risk Score',
+                            data: risks.map(r => r.score),
+                            backgroundColor: risks.map(r => 
+                                r.priority === 'High' ? 'rgba(198, 40, 40, 0.7)' :
+                                r.priority === 'Medium' ? 'rgba(255, 143, 0, 0.7)' :
+                                'rgba(46, 125, 50, 0.7)'),
+                            borderColor: risks.map(r => 
+                                r.priority === 'High' ? 'rgba(198, 40, 40, 1)' :
+                                r.priority === 'Medium' ? 'rgba(255, 143, 0, 1)' :
+                                'rgba(46, 125, 50, 1)'),
+                            borderWidth: 1
+                        }]
                     },
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `Score: ${context.raw} (${risks[context.dataIndex].priority} priority)`;
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 9,
+                                title: {
+                                    display: true,
+                                    text: 'Risk Score'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Identified Risks'
                                 }
                             }
                         },
-                        legend: {
-                            display: false
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Score: ${context.raw} (${risks[context.dataIndex].priority} priority)`;
+                                    }
+                                }
+                            },
+                            legend: {
+                                display: false
+                            }
                         }
                     }
-                }
-            });
+                });
+            }
         }
         
         // Team management
@@ -1306,9 +1406,10 @@
             newMember.innerHTML = `
                 <input type="text" placeholder="Name" class="team-name">
                 <input type="text" placeholder="Role" class="team-role">
-                <button onclick="removeTeamMember(this)" class="btn-danger">Remove</button>
+                <button type="button" onclick="return removeTeamMember(this)" class="btn-danger">Remove</button>
             `;
             container.appendChild(newMember);
+            return false;
         }
         
         function removeTeamMember(button) {
@@ -1317,6 +1418,7 @@
             } else {
                 alert('You need at least one team member');
             }
+            return false;
         }
         
         function getTeamMembers() {
@@ -1427,47 +1529,10 @@
                 document.getElementById('project-description').value = data.projectDescription || '';
                 
                 // Step 3 (will be populated when step is activated)
-                if (data.activities) {
-                    setTimeout(() => {
-                        setSelectedCheckboxes('activities', data.activities || []);
-                        document.getElementById('activity-other-text').value = data.activityOther || '';
-                        if (data.activities.includes('Other')) {
-                            document.getElementById('activity-other').checked = true;
-                            document.getElementById('activity-other-text').style.display = 'block';
-                        }
-                        document.getElementById('activity-frequency').value = data.activityFrequency || '';
-                        document.getElementById('activity-staff').value = data.activityStaff || '';
-                    }, 0);
-                }
                 
                 // Step 4 (will be populated when step is activated)
-                if (data.risks) {
-                    setTimeout(() => {
-                        setSelectedCheckboxes('risks', data.risks || []);
-                        document.getElementById('risk-other-text').value = data.riskOther || '';
-                        if (data.risks.includes('Other')) {
-                            document.getElementById('risk-other').checked = true;
-                            document.getElementById('risk-other-text').style.display = 'block';
-                        }
-                        document.getElementById('known-issues').value = data.knownIssues || '';
-                        document.getElementById('visitor-frequency').value = data.visitorFrequency || '';
-                    }, 0);
-                }
                 
                 // Step 5 (will be populated when step is activated)
-                if (data.riskScores) {
-                    setTimeout(() => {
-                        data.riskScores.forEach((risk, i) => {
-                            const row = document.querySelectorAll('#risk-matrix-body tr')[i];
-                            if (row) {
-                                row.querySelector('.likelihood').value = risk.likelihood;
-                                row.querySelector('.impact').value = risk.impact;
-                                updateRiskScore(row.querySelector('.likelihood'));
-                            }
-                        });
-                        document.getElementById('risk-notes').value = data.riskNotes || '';
-                    }, 0);
-                }
                 
                 // Step 6
                 setSelectedCheckboxes('controls', data.controls || []);
@@ -1480,20 +1545,6 @@
                 document.getElementById('challenges').value = data.challenges || '';
                 
                 // Step 7 (will be populated when step is activated)
-                if (data.measures) {
-                    setTimeout(() => {
-                        setSelectedCheckboxes('measures', data.measures || []);
-                        document.getElementById('measure-other-text').value = data.measureOther || '';
-                        if (data.measures.includes('Other')) {
-                            document.getElementById('measure-other').checked = true;
-                            document.getElementById('measure-other-text').style.display = 'block';
-                        }
-                        document.getElementById('implementation').value = data.implementation || '';
-                        document.getElementById('monitoring').value = data.monitoring || '';
-                        document.getElementById('budget').value = data.budget || '';
-                        document.getElementById('timeline').value = data.timeline || '';
-                    }, 0);
-                }
                 
                 // Step 8
                 if (data.teamMembers && data.teamMembers.length > 0) {
@@ -1505,7 +1556,7 @@
                         newMember.innerHTML = `
                             <input type="text" placeholder="Name" class="team-name" value="${member.name || ''}">
                             <input type="text" placeholder="Role" class="team-role" value="${member.role || ''}">
-                            <button onclick="removeTeamMember(this)" class="btn-danger">Remove</button>
+                            <button type="button" onclick="return removeTeamMember(this)" class="btn-danger">Remove</button>
                         `;
                         container.appendChild(newMember);
                     });
@@ -1530,55 +1581,9 @@
             });
         }
         
-        function updateReviewSummary() {
-            const data = JSON.parse(localStorage.getItem('biosecurityPlanData'));
-            if (!data) return;
-            
-            let html = `
-                <div class="output-section">
-                    <h3>Organization Details</h3>
-                    <p><strong>Organization:</strong> ${data.orgName}</p>
-                    <p><strong>Type:</strong> ${data.orgType || 'Not specified'}</p>
-                    <p><strong>Size:</strong> ${data.orgSize || 'Not specified'}</p>
-                    <p><strong>Primary Contact:</strong> ${data.primaryContact}</p>
-                    <p><strong>Email:</strong> ${data.contactEmail}</p>
-                </div>
-                
-                <div class="output-section">
-                    <h3>Project/Site Details</h3>
-                    <p><strong>Name:</strong> ${data.projectName}</p>
-                    <p><strong>Location:</strong> ${data.projectLocation}</p>
-                    <p><strong>Size:</strong> ${data.projectSize || 'Not specified'} ${data.sizeUnit || 'hectares'}</p>
-                    <p><strong>Description:</strong> ${data.projectDescription || 'Not provided'}</p>
-                </div>
-                
-                <div class="output-section">
-                    <h3>Activities</h3>
-                    <p><strong>Primary Activities:</strong> ${data.activities.join(', ')}${data.activityOther ? ' (' + data.activityOther + ')' : ''}</p>
-                    <p><strong>Frequency:</strong> ${data.activityFrequency || 'Not specified'}</p>
-                    <p><strong>Staff/Volunteers:</strong> ${data.activityStaff || 'Not specified'}</p>
-                </div>
-                
-                <div class="output-section">
-                    <h3>Risk Assessment</h3>
-                    <p><strong>Identified Risks:</strong> ${data.risks.join(', ')}${data.riskOther ? ' (' + data.riskOther + ')' : ''}</p>
-                    <p><strong>Known Issues:</strong> ${data.knownIssues || 'None specified'}</p>
-                    <p><strong>Visitor Frequency:</strong> ${data.visitorFrequency}</p>
-                    ${data.riskScores && data.riskScores.length > 0 ? `
-                        <p><strong>Risk Scores:</strong></p>
-                        <ul>
-                            ${data.riskScores.map(r => `<li>${r.name}: Score ${r.score} (${r.priority} priority)</li>`).join('')}
-                        </ul>
-                    ` : ''}
-                </div>
-            `;
-            
-            document.getElementById('review-summary').innerHTML = html;
-        }
-        
         // Plan generation functions
         function generatePlan() {
-            if (!validateStep(8)) return;
+            if (!validateStep(8)) return false;
             
             saveProgress();
             const data = JSON.parse(localStorage.getItem('biosecurityPlanData'));
@@ -1605,6 +1610,7 @@
             
             // Update chart for PDF generation
             updateRiskChart();
+            return false;
         }
         
         function generateBasicPlan(data) {
@@ -1949,59 +1955,61 @@
                     // This script will be executed when the PDF is generated
                     function generatePDFChart() {
                         const ctx = document.getElementById('pdfRiskChart').getContext('2d');
-                        const risks = ${JSON.stringify(data.riskScores)};
+                        const risks = ${JSON.stringify(data.riskScores || [])};
                         
-                        new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: risks.map(r => r.name),
-                                datasets: [{
-                                    label: 'Risk Score',
-                                    data: risks.map(r => r.score),
-                                    backgroundColor: risks.map(r => 
-                                        r.priority === 'High' ? 'rgba(198, 40, 40, 0.7)' :
-                                        r.priority === 'Medium' ? 'rgba(255, 143, 0, 0.7)' :
-                                        'rgba(46, 125, 50, 0.7)'),
-                                    borderColor: risks.map(r => 
-                                        r.priority === 'High' ? 'rgba(198, 40, 40, 1)' :
-                                        r.priority === 'Medium' ? 'rgba(255, 143, 0, 1)' :
-                                        'rgba(46, 125, 50, 1)'),
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true,
-                                        max: 9,
-                                        title: {
-                                            display: true,
-                                            text: 'Risk Score'
-                                        }
-                                    },
-                                    x: {
-                                        title: {
-                                            display: true,
-                                            text: 'Identified Risks'
-                                        }
-                                    }
+                        if (risks.length > 0) {
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: risks.map(r => r.name),
+                                    datasets: [{
+                                        label: 'Risk Score',
+                                        data: risks.map(r => r.score),
+                                        backgroundColor: risks.map(r => 
+                                            r.priority === 'High' ? 'rgba(198, 40, 40, 0.7)' :
+                                            r.priority === 'Medium' ? 'rgba(255, 143, 0, 0.7)' :
+                                            'rgba(46, 125, 50, 0.7)'),
+                                        borderColor: risks.map(r => 
+                                            r.priority === 'High' ? 'rgba(198, 40, 40, 1)' :
+                                            r.priority === 'Medium' ? 'rgba(255, 143, 0, 1)' :
+                                            'rgba(46, 125, 50, 1)'),
+                                        borderWidth: 1
+                                    }]
                                 },
-                                plugins: {
-                                    tooltip: {
-                                        callbacks: {
-                                            label: function(context) {
-                                                return \`Score: \${context.raw} (\${risks[context.dataIndex].priority} priority)\`;
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            max: 9,
+                                            title: {
+                                                display: true,
+                                                text: 'Risk Score'
+                                            }
+                                        },
+                                        x: {
+                                            title: {
+                                                display: true,
+                                                text: 'Identified Risks'
                                             }
                                         }
                                     },
-                                    legend: {
-                                        display: false
+                                    plugins: {
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function(context) {
+                                                    return \`Score: \${context.raw} (\${risks[context.dataIndex].priority} priority)\`;
+                                                }
+                                            }
+                                        },
+                                        legend: {
+                                            display: false
+                                        }
                                     }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                     
                     // Generate the chart when the page loads
@@ -2095,6 +2103,7 @@
                 
                 doc.save(`${document.getElementById('output-title').textContent}.pdf`);
             });
+            return false;
         }
         
         function sharePlan(method) {
@@ -2114,6 +2123,7 @@
                     alert('In a complete implementation, this would generate a shareable link to your plan. For now, you can save the PDF to share.');
                     break;
             }
+            return false;
         }
         
         function resetForm() {
@@ -2133,8 +2143,9 @@
                     card.classList.remove('selected');
                 });
                 document.getElementById('industry-card-natural').classList.add('selected');
-                document.getElementById('industry').value = 'Natural Area Restoration';
+                document.getElementById('industry').value = 'natural';
                 document.getElementById('industry-other-text').style.display = 'none';
+                document.getElementById('industry-other-text').value = '';
                 
                 // Reset template selection
                 document.querySelectorAll('.template-card').forEach(card => {
@@ -2148,7 +2159,7 @@
                     <div class="team-member">
                         <input type="text" placeholder="Name" class="team-name">
                         <input type="text" placeholder="Role" class="team-role">
-                        <button onclick="removeTeamMember(this)" class="btn-danger">Remove</button>
+                        <button type="button" onclick="return removeTeamMember(this)" class="btn-danger">Remove</button>
                     </div>
                 `;
                 
@@ -2160,6 +2171,7 @@
                 });
                 updateStepIndicator();
             }
+            return false;
         }
     </script>
 </body>

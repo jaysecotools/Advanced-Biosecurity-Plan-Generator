@@ -528,27 +528,11 @@
             <div class="question">
                 <label class="required">Primary Industry</label>
                 <div class="industry-selection">
-                    <div class="industry-card" onclick="return selectIndustry('restoration')" id="industry-card-restoration">
-                        <div class="industry-icon">🌱</div>
+                    <div class="industry-card" onclick="return selectIndustry('conservation')" id="industry-card-conservation">
+                        <div class="industry-icon">🌿</div>
                         <div>
-                            <h3>Natural Area Restoration</h3>
-                            <p>Ecological restoration, habitat rehabilitation</p>
-                        </div>
-                    </div>
-                    
-                    <div class="industry-card" onclick="return selectIndustry('ecosystem')" id="industry-card-ecosystem">
-                        <div class="industry-icon">🌍</div>
-                        <div>
-                            <h3>Ecosystem Maintenance</h3>
-                            <p>Conservation, biodiversity management</p>
-                        </div>
-                    </div>
-                    
-                    <div class="industry-card" onclick="return selectIndustry('agriculture')" id="industry-card-agriculture">
-                        <div class="industry-icon">🚜</div>
-                        <div>
-                            <h3>Agriculture</h3>
-                            <p>Crop production, livestock farming</p>
+                            <h3>Conservation and Ecosystem Management</h3>
+                            <p>Ecological restoration, habitat rehabilitation, biodiversity management</p>
                         </div>
                     </div>
                     
@@ -556,23 +540,15 @@
                         <div class="industry-icon">🌷</div>
                         <div>
                             <h3>Horticulture</h3>
-                            <p>Gardening, landscaping, plant cultivation</p>
+                            <p>Plant cultivation, landscaping, nursery operations</p>
                         </div>
                     </div>
                     
-                    <div class="industry-card" onclick="return selectIndustry('forestry')" id="industry-card-forestry">
-                        <div class="industry-icon">🌲</div>
+                    <div class="industry-card" onclick="return selectIndustry('agriculture')" id="industry-card-agriculture">
+                        <div class="industry-icon">🚜</div>
                         <div>
-                            <h3>Forestry Operations</h3>
-                            <p>Timber production, forest management</p>
-                        </div>
-                    </div>
-                    
-                    <div class="industry-card" onclick="return selectIndustry('nursery')" id="industry-card-nursery">
-                        <div class="industry-icon">🪴</div>
-                        <div>
-                            <h3>Plant Nursery</h3>
-                            <p>Plant propagation, seedling production</p>
+                            <h3>Agriculture</h3>
+                            <p>Crop production, livestock farming, agribusiness</p>
                         </div>
                     </div>
                     
@@ -820,6 +796,14 @@
                         <label for="control-ppe">Personal protective equipment</label>
                     </div>
                     <div class="checkbox-option">
+                        <input type="checkbox" id="control-visitor" name="controls" value="Visitor management systems">
+                        <label for="control-visitor">Visitor management systems</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="control-waste" name="controls" value="Waste management protocols">
+                        <label for="control-waste">Waste management protocols</label>
+                    </div>
+                    <div class="checkbox-option">
                         <input type="checkbox" id="control-other" name="controls" value="Other">
                         <label for="control-other">Other (please specify)</label>
                         <input type="text" id="control-other-text" style="margin-top: 5px; display: none;">
@@ -961,64 +945,82 @@
         
         // Industry-specific configurations
         const industryConfig = {
-            'restoration': {
-                name: 'Natural Area Restoration',
+            'conservation': {
+                name: 'Conservation and Ecosystem Management',
                 activities: [
-                    'Native plant revegetation',
-                    'Weed control and eradication',
-                    'Pest animal management',
-                    'Erosion control works',
-                    'Habitat reconstruction',
-                    'Ecological monitoring',
-                    'Seed collection and propagation'
+                    'Habitat restoration',
+                    'Weed and pest control',
+                    'Native species reintroduction',
+                    'Erosion control',
+                    'Biodiversity monitoring',
+                    'Fire management',
+                    'Visitor management',
+                    'Waterway restoration',
+                    'Seed collection and propagation',
+                    'Ecological surveys'
                 ],
                 risks: [
-                    'Introduction of weed species',
+                    'Introduction of invasive species',
                     'Spread of plant pathogens',
-                    'Soil contamination from equipment',
+                    'Soil and water contamination',
                     'Cross-contamination between sites',
-                    'Introduction of invasive animals',
-                    'Waterway contamination',
-                    'Loss of genetic integrity'
+                    'Introduction of pest animals',
+                    'Loss of genetic integrity',
+                    'Unauthorized species release',
+                    'Equipment-mediated contamination',
+                    'Visitor-mediated contamination',
+                    'Climate change impacts'
                 ],
                 measures: [
+                    'Site-specific hygiene protocols',
                     'Equipment cleaning stations',
                     'Footwear and clothing decontamination',
-                    'Plant material quarantine protocols',
-                    'Staff and volunteer training programs',
+                    'Plant material quarantine procedures',
+                    'Comprehensive staff training programs',
                     'Vehicle washdown facilities',
-                    'Site-specific hygiene protocols',
-                    'Pre-activity risk assessments'
+                    'Pre-activity risk assessments',
+                    'Visitor biosecurity briefings',
+                    'Pathogen screening protocols',
+                    'Wildlife health monitoring'
                 ]
             },
-            'ecosystem': {
-                name: 'Ecosystem Maintenance',
+            'horticulture': {
+                name: 'Horticulture',
                 activities: [
-                    'Biodiversity monitoring',
-                    'Pest and disease surveillance',
-                    'Habitat protection works',
-                    'Visitor management',
-                    'Water quality testing',
-                    'Species reintroduction',
-                    'Fire management'
+                    'Plant propagation',
+                    'Landscape construction',
+                    'Garden maintenance',
+                    'Irrigation system management',
+                    'Pest and disease control',
+                    'Soil and media preparation',
+                    'Plant sales and distribution',
+                    'Greenhouse operations',
+                    'Turf management',
+                    'Arboriculture'
                 ],
                 risks: [
-                    'Pathogen transmission',
-                    'Invasive species establishment',
-                    'Habitat fragmentation',
-                    'Soil and water contamination',
-                    'Disease vectors',
-                    'Genetic pollution',
-                    'Unauthorized species release'
+                    'Plant pathogen outbreaks',
+                    'Pest infestations',
+                    'Contaminated growing media',
+                    'Water system contamination',
+                    'Equipment cross-contamination',
+                    'Introduction of invasive species',
+                    'Pesticide resistance',
+                    'Worker exposure to hazards',
+                    'Unauthorized plant movement',
+                    'Genetic contamination'
                 ],
                 measures: [
-                    'Access control systems',
-                    'Visitor biosecurity briefings',
-                    'Monitoring protocols',
-                    'Quarantine procedures',
-                    'Emergency response plans',
-                    'Pathogen screening',
-                    'Wildlife health assessments'
+                    'Plant health certification',
+                    'Growing media sterilization',
+                    'Tool and equipment sanitation',
+                    'Pest exclusion systems',
+                    'Worker hygiene stations',
+                    'Visitor management protocols',
+                    'Waste management systems',
+                    'Quarantine areas for new plants',
+                    'Integrated pest management',
+                    'Water treatment systems'
                 ]
             },
             'agriculture': {
@@ -1030,7 +1032,10 @@
                     'Pest and disease control',
                     'Soil management',
                     'Equipment operations',
-                    'Produce handling and storage'
+                    'Produce handling and storage',
+                    'Feed management',
+                    'Pasture management',
+                    'Agrochemical application'
                 ],
                 risks: [
                     'Crop disease outbreaks',
@@ -1039,7 +1044,10 @@
                     'Soil contamination',
                     'Water contamination',
                     'Equipment cross-contamination',
-                    'Worker health risks'
+                    'Worker health risks',
+                    'Introduction of invasive species',
+                    'Feed contamination',
+                    'Zoonotic disease transmission'
                 ],
                 measures: [
                     'Farm biosecurity plan',
@@ -1048,97 +1056,10 @@
                     'Quarantine areas for new stock',
                     'Pest monitoring systems',
                     'Visitor logbooks',
-                    'Staff training programs'
-                ]
-            },
-            'horticulture': {
-                name: 'Horticulture',
-                activities: [
-                    'Plant propagation',
-                    'Garden maintenance',
-                    'Landscape construction',
-                    'Pest and disease management',
-                    'Irrigation system maintenance',
-                    'Plant sales and distribution',
-                    'Soil and media preparation'
-                ],
-                risks: [
-                    'Plant pathogen spread',
-                    'Invasive plant establishment',
-                    'Contaminated growing media',
-                    'Pesticide misuse',
-                    'Water system contamination',
-                    'Equipment cross-contamination',
-                    'Worker exposure to hazards'
-                ],
-                measures: [
-                    'Plant health certification',
-                    'Growing media sterilization',
-                    'Tool and equipment sanitation',
-                    'Pest exclusion systems',
-                    'Worker hygiene stations',
-                    'Waste management protocols',
-                    'Visitor management systems'
-                ]
-            },
-            'forestry': {
-                name: 'Forestry Operations',
-                activities: [
-                    'Timber harvesting',
-                    'Plantation management',
-                    'Pest and disease control',
-                    'Road and track maintenance',
-                    'Revegetation works',
-                    'Fire management',
-                    'Wildlife monitoring'
-                ],
-                risks: [
-                    'Forest pathogen introduction',
-                    'Invasive plant spread',
-                    'Soil erosion and contamination',
-                    'Equipment cross-contamination',
-                    'Waterway pollution',
-                    'Worker health hazards',
-                    'Unauthorized species movement'
-                ],
-                measures: [
-                    'Vehicle washdown facilities',
-                    'Equipment cleaning protocols',
-                    'Worker hygiene training',
-                    'Pest monitoring systems',
-                    'Quarantine procedures',
-                    'Site access controls',
-                    'Emergency response plans'
-                ]
-            },
-            'nursery': {
-                name: 'Plant Nursery',
-                activities: [
-                    'Plant propagation',
-                    'Potting and repotting',
-                    'Irrigation system maintenance',
-                    'Pest and disease control',
-                    'Plant sales and distribution',
-                    'Growing media preparation',
-                    'Facility maintenance'
-                ],
-                risks: [
-                    'Plant pathogen outbreaks',
-                    'Pest infestations',
-                    'Contaminated growing media',
-                    'Water system contamination',
-                    'Equipment cross-contamination',
-                    'Worker exposure to hazards',
-                    'Unauthorized plant movement'
-                ],
-                measures: [
-                    'Plant quarantine protocols',
-                    'Growing media sterilization',
-                    'Tool and equipment sanitation',
-                    'Pest exclusion systems',
-                    'Worker hygiene stations',
-                    'Visitor management systems',
-                    'Waste management protocols'
+                    'Staff training programs',
+                    'Feed storage protocols',
+                    'Water treatment systems',
+                    'Vaccination programs'
                 ]
             },
             'other': {
@@ -1165,7 +1086,7 @@
         // Initialize the tool
         document.addEventListener('DOMContentLoaded', function() {
             // Set default industry selection
-            selectIndustry('restoration');
+            selectIndustry('conservation');
             
             // Check for saved theme preference
             const savedTheme = localStorage.getItem('theme');
@@ -1385,10 +1306,10 @@
         
         // Dynamic content updates based on industry
         function updateActivities() {
-            const industry = document.getElementById('industry').value || 'restoration';
+            const industry = document.getElementById('industry').value || 'conservation';
             const industryKey = Object.keys(industryConfig).find(key => 
-                industryConfig[key].name === industry) || 'restoration';
-            const config = industryConfig[industryKey] || industryConfig.restoration;
+                industryConfig[key].name === industry) || 'conservation';
+            const config = industryConfig[industryKey] || industryConfig.conservation;
             
             const container = document.getElementById('activities-container');
             container.innerHTML = config.activities.map(activity => `
@@ -1426,10 +1347,10 @@
         }
         
         function updateRisks() {
-            const industry = document.getElementById('industry').value || 'restoration';
+            const industry = document.getElementById('industry').value || 'conservation';
             const industryKey = Object.keys(industryConfig).find(key => 
-                industryConfig[key].name === industry) || 'restoration';
-            const config = industryConfig[industryKey] || industryConfig.restoration;
+                industryConfig[key].name === industry) || 'conservation';
+            const config = industryConfig[industryKey] || industryConfig.conservation;
             
             const container = document.getElementById('risks-container');
             container.innerHTML = config.risks.map(risk => `
@@ -1467,10 +1388,10 @@
         }
         
         function updateMeasures() {
-            const industry = document.getElementById('industry').value || 'restoration';
+            const industry = document.getElementById('industry').value || 'conservation';
             const industryKey = Object.keys(industryConfig).find(key => 
-                industryConfig[key].name === industry) || 'restoration';
-            const config = industryConfig[industryKey] || industryConfig.restoration;
+                industryConfig[key].name === industry) || 'conservation';
+            const config = industryConfig[industryKey] || industryConfig.conservation;
             
             const container = document.getElementById('measures-container');
             container.innerHTML = config.measures.map(measure => `
@@ -2405,8 +2326,8 @@
                 document.querySelectorAll('.industry-card').forEach(card => {
                     card.classList.remove('selected');
                 });
-                document.getElementById('industry-card-restoration').classList.add('selected');
-                document.getElementById('industry').value = 'restoration';
+                document.getElementById('industry-card-conservation').classList.add('selected');
+                document.getElementById('industry').value = 'conservation';
                 document.getElementById('industry-other-text').style.display = 'none';
                 document.getElementById('industry-other-text').value = '';
                 

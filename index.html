@@ -192,6 +192,15 @@
             transform: translateY(-1px);
         }
         
+        .btn-success {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: var(--dark);
+        }
+        
         .progress-container {
             display: flex;
             align-items: center;
@@ -449,6 +458,40 @@
             margin-top: 20px;
         }
         
+        .custom-field-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .custom-field-container input {
+            flex-grow: 1;
+        }
+        
+        .custom-field-container button {
+            padding: 8px 12px;
+        }
+        
+        .activity-item, .risk-item, .measure-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .activity-item input, 
+        .risk-item input,
+        .measure-item input {
+            margin-right: 10px;
+        }
+        
+        .activity-item button, 
+        .risk-item button,
+        .measure-item button {
+            margin-left: 10px;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        
         /* Dark mode toggle */
         .theme-toggle {
             position: fixed;
@@ -663,8 +706,12 @@
             
             <div class="question">
                 <label class="required">Primary Activities</label>
-                <div class="checkbox-group" id="activities-container">
+                <div id="activities-container">
                     <!-- Will be populated dynamically based on industry -->
+                </div>
+                <div class="custom-field-container">
+                    <input type="text" id="new-activity" placeholder="Add custom activity">
+                    <button type="button" onclick="addCustomActivity()" class="btn-success">Add Activity</button>
                 </div>
             </div>
             
@@ -699,8 +746,12 @@
             
             <div class="question">
                 <label class="required">Potential Risks</label>
-                <div class="checkbox-group" id="risks-container">
+                <div id="risks-container">
                     <!-- Will be populated dynamically based on industry -->
+                </div>
+                <div class="custom-field-container">
+                    <input type="text" id="new-risk" placeholder="Add custom risk">
+                    <button type="button" onclick="addCustomRisk()" class="btn-success">Add Risk</button>
                 </div>
             </div>
             
@@ -770,7 +821,7 @@
             
             <div class="question">
                 <label>Existing Biosecurity Controls</label>
-                <div class="checkbox-group" id="controls-container">
+                <div id="controls-container">
                     <div class="checkbox-option">
                         <input type="checkbox" id="control-cleaning" name="controls" value="Equipment cleaning protocols">
                         <label for="control-cleaning">Equipment cleaning protocols</label>
@@ -803,11 +854,10 @@
                         <input type="checkbox" id="control-waste" name="controls" value="Waste management protocols">
                         <label for="control-waste">Waste management protocols</label>
                     </div>
-                    <div class="checkbox-option">
-                        <input type="checkbox" id="control-other" name="controls" value="Other">
-                        <label for="control-other">Other (please specify)</label>
-                        <input type="text" id="control-other-text" style="margin-top: 5px; display: none;">
-                    </div>
+                </div>
+                <div class="custom-field-container">
+                    <input type="text" id="new-control" placeholder="Add custom control">
+                    <button type="button" onclick="addCustomControl()" class="btn-success">Add Control</button>
                 </div>
             </div>
             
@@ -833,8 +883,12 @@
             
             <div class="question">
                 <label class="required">Additional Measures to Implement</label>
-                <div class="checkbox-group" id="measures-container">
+                <div id="measures-container">
                     <!-- Will be populated dynamically based on industry -->
+                </div>
+                <div class="custom-field-container">
+                    <input type="text" id="new-measure" placeholder="Add custom measure">
+                    <button type="button" onclick="addCustomMeasure()" class="btn-success">Add Measure</button>
                 </div>
             </div>
             
@@ -942,6 +996,10 @@
         const totalSteps = 9;
         let currentStep = 0;
         let riskChart = null;
+        let customActivities = [];
+        let customRisks = [];
+        let customControls = [];
+        let customMeasures = [];
         
         // Industry-specific configurations
         const industryConfig = {
@@ -957,7 +1015,17 @@
                     'Visitor management',
                     'Waterway restoration',
                     'Seed collection and propagation',
-                    'Ecological surveys'
+                    'Ecological surveys',
+                    'Wildlife monitoring',
+                    'Feral animal control',
+                    'Revegetation',
+                    'Wetland management',
+                    'Coastal rehabilitation',
+                    'Cultural site protection',
+                    'Soil conservation',
+                    'Pest plant eradication',
+                    'Threatened species management',
+                    'Community education programs'
                 ],
                 risks: [
                     'Introduction of invasive species',
@@ -969,7 +1037,17 @@
                     'Unauthorized species release',
                     'Equipment-mediated contamination',
                     'Visitor-mediated contamination',
-                    'Climate change impacts'
+                    'Climate change impacts',
+                    'Spread of fungal diseases',
+                    'Introduction of aquatic pests',
+                    'Soil erosion',
+                    'Habitat fragmentation',
+                    'Loss of biodiversity',
+                    'Spread of weeds through vehicles',
+                    'Disease transmission to wildlife',
+                    'Contamination from adjacent land uses',
+                    'Illegal dumping',
+                    'Unauthorized access'
                 ],
                 measures: [
                     'Site-specific hygiene protocols',
@@ -981,7 +1059,17 @@
                     'Pre-activity risk assessments',
                     'Visitor biosecurity briefings',
                     'Pathogen screening protocols',
-                    'Wildlife health monitoring'
+                    'Wildlife health monitoring',
+                    'Restricted access zones',
+                    'Designated entry/exit points',
+                    'Boot cleaning stations',
+                    'Tool sterilization procedures',
+                    'Vehicle movement controls',
+                    'Soil testing protocols',
+                    'Water treatment systems',
+                    'Signage and public awareness',
+                    'Pest surveillance programs',
+                    'Emergency response plans'
                 ]
             },
             'horticulture': {
@@ -996,7 +1084,17 @@
                     'Plant sales and distribution',
                     'Greenhouse operations',
                     'Turf management',
-                    'Arboriculture'
+                    'Arboriculture',
+                    'Pruning and trimming',
+                    'Fertilizer application',
+                    'Mulching',
+                    'Composting',
+                    'Plant health monitoring',
+                    'Plant quarantine',
+                    'Seed collection',
+                    'Grafting and budding',
+                    'Hydroponics',
+                    'Retail plant sales'
                 ],
                 risks: [
                     'Plant pathogen outbreaks',
@@ -1008,7 +1106,17 @@
                     'Pesticide resistance',
                     'Worker exposure to hazards',
                     'Unauthorized plant movement',
-                    'Genetic contamination'
+                    'Genetic contamination',
+                    'Spread of fungal spores',
+                    'Introduction of nematodes',
+                    'Contaminated tools',
+                    'Infected plant material',
+                    'Poor sanitation practices',
+                    'Inadequate waste disposal',
+                    'Soil-borne diseases',
+                    'Cross-pollination risks',
+                    'Improper storage of chemicals',
+                    'Visitor contamination'
                 ],
                 measures: [
                     'Plant health certification',
@@ -1020,7 +1128,17 @@
                     'Waste management systems',
                     'Quarantine areas for new plants',
                     'Integrated pest management',
-                    'Water treatment systems'
+                    'Water treatment systems',
+                    'Regular plant inspections',
+                    'Disinfection procedures',
+                    'Personal protective equipment',
+                    'Record keeping systems',
+                    'Pest monitoring traps',
+                    'Restricted access areas',
+                    'Employee training programs',
+                    'Chemical storage protocols',
+                    'Washdown areas',
+                    'Biosecurity signage'
                 ]
             },
             'agriculture': {
@@ -1035,7 +1153,17 @@
                     'Produce handling and storage',
                     'Feed management',
                     'Pasture management',
-                    'Agrochemical application'
+                    'Agrochemical application',
+                    'Fencing and infrastructure',
+                    'Water management',
+                    'Grazing rotation',
+                    'Manure management',
+                    'Silage production',
+                    'Shearing and wool handling',
+                    'Milking operations',
+                    'Artificial insemination',
+                    'Quarantine procedures',
+                    'Farm biosecurity audits'
                 ],
                 risks: [
                     'Crop disease outbreaks',
@@ -1047,7 +1175,17 @@
                     'Worker health risks',
                     'Introduction of invasive species',
                     'Feed contamination',
-                    'Zoonotic disease transmission'
+                    'Zoonotic disease transmission',
+                    'Spread of weed seeds',
+                    'Chemical spills',
+                    'Poor animal welfare',
+                    'Contaminated footwear/vehicles',
+                    'Rodent and bird pests',
+                    'Antibiotic resistance',
+                    'Feed storage issues',
+                    'Manure runoff',
+                    'Unauthorized farm access',
+                    'Wildlife disease vectors'
                 ],
                 measures: [
                     'Farm biosecurity plan',
@@ -1059,7 +1197,17 @@
                     'Staff training programs',
                     'Feed storage protocols',
                     'Water treatment systems',
-                    'Vaccination programs'
+                    'Vaccination programs',
+                    'Footbaths at entry points',
+                    'Restricted access zones',
+                    'Animal health monitoring',
+                    'Crop rotation practices',
+                    'Sanitation procedures',
+                    'Waste management plans',
+                    'Pest control programs',
+                    'Record keeping systems',
+                    'Emergency response plans',
+                    'Biosecurity signage'
                 ]
             },
             'other': {
@@ -1109,10 +1257,15 @@
                 }
             });
             
-            document.getElementById('control-other').addEventListener('change', function() {
-                document.getElementById('control-other-text').style.display = 
-                    this.checked ? 'block' : 'none';
-            });
+            // Initialize custom arrays from localStorage if they exist
+            const savedData = localStorage.getItem('biosecurityPlanData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                customActivities = data.customActivities || [];
+                customRisks = data.customRisks || [];
+                customControls = data.customControls || [];
+                customMeasures = data.customMeasures || [];
+            }
         });
         
         // Theme toggle functions
@@ -1304,6 +1457,142 @@
             return false;
         }
         
+        // Custom field management
+        function addCustomActivity() {
+            const activityInput = document.getElementById('new-activity');
+            const activity = activityInput.value.trim();
+            
+            if (activity) {
+                customActivities.push(activity);
+                updateActivities();
+                activityInput.value = '';
+                saveProgress();
+            }
+        }
+        
+        function removeCustomActivity(activity) {
+            customActivities = customActivities.filter(a => a !== activity);
+            updateActivities();
+            saveProgress();
+        }
+        
+        function addCustomRisk() {
+            const riskInput = document.getElementById('new-risk');
+            const risk = riskInput.value.trim();
+            
+            if (risk) {
+                customRisks.push(risk);
+                updateRisks();
+                riskInput.value = '';
+                saveProgress();
+            }
+        }
+        
+        function removeCustomRisk(risk) {
+            customRisks = customRisks.filter(r => r !== risk);
+            updateRisks();
+            saveProgress();
+        }
+        
+        function addCustomControl() {
+            const controlInput = document.getElementById('new-control');
+            const control = controlInput.value.trim();
+            
+            if (control) {
+                customControls.push(control);
+                updateControls();
+                controlInput.value = '';
+                saveProgress();
+            }
+        }
+        
+        function removeCustomControl(control) {
+            customControls = customControls.filter(c => c !== control);
+            updateControls();
+            saveProgress();
+        }
+        
+        function addCustomMeasure() {
+            const measureInput = document.getElementById('new-measure');
+            const measure = measureInput.value.trim();
+            
+            if (measure) {
+                customMeasures.push(measure);
+                updateMeasures();
+                measureInput.value = '';
+                saveProgress();
+            }
+        }
+        
+        function removeCustomMeasure(measure) {
+            customMeasures = customMeasures.filter(m => m !== measure);
+            updateMeasures();
+            saveProgress();
+        }
+        
+        function updateControls() {
+            const container = document.getElementById('controls-container');
+            
+            // Standard controls
+            let html = `
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-cleaning" name="controls" value="Equipment cleaning protocols">
+                    <label for="control-cleaning">Equipment cleaning protocols</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-quarantine" name="controls" value="Quarantine areas">
+                    <label for="control-quarantine">Quarantine areas</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-monitoring" name="controls" value="Regular monitoring">
+                    <label for="control-monitoring">Regular monitoring</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-signage" name="controls" value="Biosecurity signage">
+                    <label for="control-signage">Biosecurity signage</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-training" name="controls" value="Staff training">
+                    <label for="control-training">Staff training</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-ppe" name="controls" value="Personal protective equipment">
+                    <label for="control-ppe">Personal protective equipment</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-visitor" name="controls" value="Visitor management systems">
+                    <label for="control-visitor">Visitor management systems</label>
+                </div>
+                <div class="checkbox-option">
+                    <input type="checkbox" id="control-waste" name="controls" value="Waste management protocols">
+                    <label for="control-waste">Waste management protocols</label>
+                </div>
+            `;
+            
+            // Add custom controls
+            customControls.forEach((control, index) => {
+                const id = `control-custom-${index}`;
+                html += `
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="${id}" name="controls" value="${control}">
+                        <label for="${id}">${control}</label>
+                        <button type="button" onclick="removeCustomControl('${control}')" class="btn-danger">Remove</button>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Load saved controls if they exist
+            const savedData = localStorage.getItem('biosecurityPlanData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                setSelectedCheckboxes('controls', data.controls || []);
+                document.getElementById('existing-protocols').value = data.existingProtocols || '';
+                document.getElementById('challenges').value = data.challenges || '';
+            }
+        }
+        
         // Dynamic content updates based on industry
         function updateActivities() {
             const industry = document.getElementById('industry').value || 'conservation';
@@ -1312,35 +1601,35 @@
             const config = industryConfig[industryKey] || industryConfig.conservation;
             
             const container = document.getElementById('activities-container');
-            container.innerHTML = config.activities.map(activity => `
-                <div class="checkbox-option">
+            
+            // Standard activities
+            let html = config.activities.map(activity => `
+                <div class="activity-item">
                     <input type="checkbox" id="activity-${activity.toLowerCase().replace(/\s+/g, '-')}" 
                            name="activities" value="${activity}">
                     <label for="activity-${activity.toLowerCase().replace(/\s+/g, '-')}">${activity}</label>
                 </div>
-            `).join('') + `
-            <div class="checkbox-option">
-                <input type="checkbox" id="activity-other" name="activities" value="Other">
-                <label for="activity-other">Other (please specify)</label>
-                <input type="text" id="activity-other-text" style="margin-top: 5px; display: none;">
-            </div>`;
+            `).join('');
             
-            // Add event listener for "Other" checkbox
-            document.getElementById('activity-other').addEventListener('change', function() {
-                document.getElementById('activity-other-text').style.display = 
-                    this.checked ? 'block' : 'none';
+            // Add custom activities
+            customActivities.forEach((activity, index) => {
+                const id = `activity-custom-${index}`;
+                html += `
+                    <div class="activity-item">
+                        <input type="checkbox" id="${id}" name="activities" value="${activity}">
+                        <label for="${id}">${activity}</label>
+                        <button type="button" onclick="removeCustomActivity('${activity}')" class="btn-danger">Remove</button>
+                    </div>
+                `;
             });
+            
+            container.innerHTML = html;
             
             // Load saved activities if they exist
             const savedData = localStorage.getItem('biosecurityPlanData');
             if (savedData) {
                 const data = JSON.parse(savedData);
                 setSelectedCheckboxes('activities', data.activities || []);
-                document.getElementById('activity-other-text').value = data.activityOther || '';
-                if (data.activities && data.activities.includes('Other')) {
-                    document.getElementById('activity-other').checked = true;
-                    document.getElementById('activity-other-text').style.display = 'block';
-                }
                 document.getElementById('activity-frequency').value = data.activityFrequency || '';
                 document.getElementById('activity-staff').value = data.activityStaff || '';
             }
@@ -1353,35 +1642,35 @@
             const config = industryConfig[industryKey] || industryConfig.conservation;
             
             const container = document.getElementById('risks-container');
-            container.innerHTML = config.risks.map(risk => `
-                <div class="checkbox-option">
+            
+            // Standard risks
+            let html = config.risks.map(risk => `
+                <div class="risk-item">
                     <input type="checkbox" id="risk-${risk.toLowerCase().replace(/\s+/g, '-')}" 
                            name="risks" value="${risk}">
                     <label for="risk-${risk.toLowerCase().replace(/\s+/g, '-')}">${risk}</label>
                 </div>
-            `).join('') + `
-            <div class="checkbox-option">
-                <input type="checkbox" id="risk-other" name="risks" value="Other">
-                <label for="risk-other">Other (please specify)</label>
-                <input type="text" id="risk-other-text" style="margin-top: 5px; display: none;">
-            </div>`;
+            `).join('');
             
-            // Add event listener for "Other" checkbox
-            document.getElementById('risk-other').addEventListener('change', function() {
-                document.getElementById('risk-other-text').style.display = 
-                    this.checked ? 'block' : 'none';
+            // Add custom risks
+            customRisks.forEach((risk, index) => {
+                const id = `risk-custom-${index}`;
+                html += `
+                    <div class="risk-item">
+                        <input type="checkbox" id="${id}" name="risks" value="${risk}">
+                        <label for="${id}">${risk}</label>
+                        <button type="button" onclick="removeCustomRisk('${risk}')" class="btn-danger">Remove</button>
+                    </div>
+                `;
             });
+            
+            container.innerHTML = html;
             
             // Load saved risks if they exist
             const savedData = localStorage.getItem('biosecurityPlanData');
             if (savedData) {
                 const data = JSON.parse(savedData);
                 setSelectedCheckboxes('risks', data.risks || []);
-                document.getElementById('risk-other-text').value = data.riskOther || '';
-                if (data.risks && data.risks.includes('Other')) {
-                    document.getElementById('risk-other').checked = true;
-                    document.getElementById('risk-other-text').style.display = 'block';
-                }
                 document.getElementById('known-issues').value = data.knownIssues || '';
                 document.getElementById('visitor-frequency').value = data.visitorFrequency || '';
             }
@@ -1394,35 +1683,35 @@
             const config = industryConfig[industryKey] || industryConfig.conservation;
             
             const container = document.getElementById('measures-container');
-            container.innerHTML = config.measures.map(measure => `
-                <div class="checkbox-option">
+            
+            // Standard measures
+            let html = config.measures.map(measure => `
+                <div class="measure-item">
                     <input type="checkbox" id="measure-${measure.toLowerCase().replace(/\s+/g, '-')}" 
                            name="measures" value="${measure}">
                     <label for="measure-${measure.toLowerCase().replace(/\s+/g, '-')}">${measure}</label>
                 </div>
-            `).join('') + `
-            <div class="checkbox-option">
-                <input type="checkbox" id="measure-other" name="measures" value="Other">
-                <label for="measure-other">Other (please specify)</label>
-                <input type="text" id="measure-other-text" style="margin-top: 5px; display: none;">
-            </div>`;
+            `).join('');
             
-            // Add event listener for "Other" checkbox
-            document.getElementById('measure-other').addEventListener('change', function() {
-                document.getElementById('measure-other-text').style.display = 
-                    this.checked ? 'block' : 'none';
+            // Add custom measures
+            customMeasures.forEach((measure, index) => {
+                const id = `measure-custom-${index}`;
+                html += `
+                    <div class="measure-item">
+                        <input type="checkbox" id="${id}" name="measures" value="${measure}">
+                        <label for="${id}">${measure}</label>
+                        <button type="button" onclick="removeCustomMeasure('${measure}')" class="btn-danger">Remove</button>
+                    </div>
+                `;
             });
+            
+            container.innerHTML = html;
             
             // Load saved measures if they exist
             const savedData = localStorage.getItem('biosecurityPlanData');
             if (savedData) {
                 const data = JSON.parse(savedData);
                 setSelectedCheckboxes('measures', data.measures || []);
-                document.getElementById('measure-other-text').value = data.measureOther || '';
-                if (data.measures && data.measures.includes('Other')) {
-                    document.getElementById('measure-other').checked = true;
-                    document.getElementById('measure-other-text').style.display = 'block';
-                }
                 document.getElementById('implementation').value = data.implementation || '';
                 document.getElementById('monitoring').value = data.monitoring || '';
                 document.getElementById('budget').value = data.budget || '';
@@ -1635,12 +1924,10 @@
                 projectDescription: document.getElementById('project-description').value,
                 
                 activities: getSelectedCheckboxes('activities'),
-                activityOther: document.getElementById('activity-other-text').value,
                 activityFrequency: document.getElementById('activity-frequency').value,
                 activityStaff: document.getElementById('activity-staff').value,
                 
                 risks: getSelectedCheckboxes('risks'),
-                riskOther: document.getElementById('risk-other-text').value,
                 knownIssues: document.getElementById('known-issues').value,
                 visitorFrequency: document.getElementById('visitor-frequency').value,
                 
@@ -1648,12 +1935,10 @@
                 riskNotes: document.getElementById('risk-notes').value,
                 
                 controls: getSelectedCheckboxes('controls'),
-                controlOther: document.getElementById('control-other-text').value,
                 existingProtocols: document.getElementById('existing-protocols').value,
                 challenges: document.getElementById('challenges').value,
                 
                 measures: getSelectedCheckboxes('measures'),
-                measureOther: document.getElementById('measure-other-text').value,
                 implementation: document.getElementById('implementation').value,
                 monitoring: document.getElementById('monitoring').value,
                 budget: document.getElementById('budget').value,
@@ -1662,7 +1947,13 @@
                 teamMembers: getTeamMembers(),
                 reviewFrequency: document.getElementById('review-frequency').value,
                 template: document.getElementById('template').value,
-                planName: document.getElementById('plan-name').value
+                planName: document.getElementById('plan-name').value,
+                
+                // Save custom fields
+                customActivities: customActivities,
+                customRisks: customRisks,
+                customControls: customControls,
+                customMeasures: customMeasures
             };
             
             localStorage.setItem('biosecurityPlanData', JSON.stringify(data));
@@ -1718,15 +2009,7 @@
                 
                 // Step 5 (will be populated when step is activated)
                 
-                // Step 6
-                setSelectedCheckboxes('controls', data.controls || []);
-                document.getElementById('control-other-text').value = data.controlOther || '';
-                if (data.controls && data.controls.includes('Other')) {
-                    document.getElementById('control-other').checked = true;
-                    document.getElementById('control-other-text').style.display = 'block';
-                }
-                document.getElementById('existing-protocols').value = data.existingProtocols || '';
-                document.getElementById('challenges').value = data.challenges || '';
+                // Step 6 (will be populated when step is activated)
                 
                 // Step 7 (will be populated when step is activated)
                 
@@ -1750,6 +2033,12 @@
                     selectTemplate(data.template);
                 }
                 document.getElementById('plan-name').value = data.planName || '';
+                
+                // Load custom fields
+                customActivities = data.customActivities || [];
+                customRisks = data.customRisks || [];
+                customControls = data.customControls || [];
+                customMeasures = data.customMeasures || [];
             }
         }
         
@@ -1810,7 +2099,7 @@
                 <div class="output-section">
                     <h3>2. Key Risks</h3>
                     <ul>
-                        ${data.risks.map(r => `<li>${r}${r === 'Other' ? ' (' + data.riskOther + ')' : ''}</li>`).join('')}
+                        ${data.risks.map(r => `<li>${r}</li>`).join('')}
                     </ul>
                 </div>
                 
@@ -1819,13 +2108,13 @@
                     <p><strong>Existing Controls:</strong></p>
                     <ul>
                         ${data.controls.length > 0 ? 
-                            data.controls.map(c => `<li>${c}${c === 'Other' ? ' (' + data.controlOther + ')' : ''}</li>`).join('') : 
+                            data.controls.map(c => `<li>${c}</li>`).join('') : 
                             '<li>None reported</li>'}
                     </ul>
                     
                     <p><strong>Additional Measures:</strong></p>
                     <ul>
-                        ${data.measures.map(m => `<li>${m}${m === 'Other' ? ' (' + data.measureOther + ')' : ''}</li>`).join('')}
+                        ${data.measures.map(m => `<li>${m}</li>`).join('')}
                     </ul>
                 </div>
                 
@@ -1860,7 +2149,7 @@
                     <h3>3. Activities</h3>
                     <p>Primary activities conducted at the site:</p>
                     <ul>
-                        ${data.activities.map(a => `<li>${a}${a === 'Other' ? ' (' + data.activityOther + ')' : ''}</li>`).join('')}
+                        ${data.activities.map(a => `<li>${a}</li>`).join('')}
                     </ul>
                     <p><strong>Frequency:</strong> ${data.activityFrequency || 'Not specified'}</p>
                 </div>
@@ -1869,7 +2158,7 @@
                     <h3>4. Risk Assessment</h3>
                     <p>Identified biosecurity risks:</p>
                     <ul>
-                        ${data.risks.map(r => `<li>${r}${r === 'Other' ? ' (' + data.riskOther + ')' : ''}</li>`).join('')}
+                        ${data.risks.map(r => `<li>${r}</li>`).join('')}
                     </ul>
                     
                     ${data.riskScores && data.riskScores.length > 0 ? `
@@ -1902,7 +2191,7 @@
                     <p>Existing biosecurity measures in place:</p>
                     <ul>
                         ${data.controls.length > 0 ? 
-                            data.controls.map(c => `<li>${c}${c === 'Other' ? ' (' + data.controlOther + ')' : ''}</li>`).join('') : 
+                            data.controls.map(c => `<li>${c}</li>`).join('') : 
                             '<li>No existing controls reported</li>'}
                     </ul>
                     
@@ -1913,7 +2202,7 @@
                     <h3>6. Proposed Measures</h3>
                     <p>Additional biosecurity measures to be implemented:</p>
                     <ul>
-                        ${data.measures.map(m => `<li>${m}${m === 'Other' ? ' (' + data.measureOther + ')' : ''}</li>`).join('')}
+                        ${data.measures.map(m => `<li>${m}</li>`).join('')}
                     </ul>
                     
                     <p><strong>Implementation Plan:</strong></p>
@@ -1988,7 +2277,7 @@
                     <h4>1.1 Scope</h4>
                     <p>This plan applies to all activities conducted by ${data.orgName} at ${data.projectLocation}, including but not limited to:</p>
                     <ul>
-                        ${data.activities.map(a => `<li>${a}${a === 'Other' ? ' (' + data.activityOther + ')' : ''}</li>`).join('')}
+                        ${data.activities.map(a => `<li>${a}</li>`).join('')}
                     </ul>
                     
                     <h4>1.2 Objectives</h4>
@@ -2024,7 +2313,7 @@
                     <h4>3.1 Identified Risks</h4>
                     <p>The following biosecurity risks have been identified:</p>
                     <ul>
-                        ${data.risks.map(r => `<li>${r}${r === 'Other' ? ' (' + data.riskOther + ')' : ''}</li>`).join('')}
+                        ${data.risks.map(r => `<li>${r}</li>`).join('')}
                     </ul>
                     
                     ${data.riskScores && data.riskScores.length > 0 ? `
@@ -2068,14 +2357,14 @@
                     <p>The following biosecurity measures are currently in place:</p>
                     <ul>
                         ${data.controls.length > 0 ? 
-                            data.controls.map(c => `<li>${c}${c === 'Other' ? ' (' + data.controlOther + ')' : ''}</li>`).join('') : 
+                            data.controls.map(c => `<li>${c}</li>`).join('') : 
                             '<li>No existing controls reported</li>'}
                     </ul>
                     
                     <h4>4.2 Additional Measures</h4>
                     <p>The following additional biosecurity measures will be implemented:</p>
                     <ul>
-                        ${data.measures.map(m => `<li>${m}${m === 'Other' ? ' (' + data.measureOther + ')' : ''}</li>`).join('')}
+                        ${data.measures.map(m => `<li>${m}</li>`).join('')}
                     </ul>
                     
                     <h4>4.3 Implementation Plan</h4>
@@ -2346,6 +2635,12 @@
                         <button type="button" onclick="return removeTeamMember(this)" class="btn-danger">Remove</button>
                     </div>
                 `;
+                
+                // Reset custom fields
+                customActivities = [];
+                customRisks = [];
+                customControls = [];
+                customMeasures = [];
                 
                 document.getElementById('plan-output').style.display = 'none';
                 document.querySelector('.wizard-container').style.display = 'block';
